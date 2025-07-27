@@ -1,0 +1,31 @@
+<h1>Admin: Products</h1>
+
+<%= link_to "Add New Product", new_admin_product_path, class: "btn btn-primary" %>
+
+<table border="1" cellpadding="5" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>SKU</th>
+      <th>Category</th>
+      <th>Price</th>
+      <th>Stock Quantity</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td data-label="Name"><%= product.name %></td>
+        <td data-label="SKU"><%= product.sku %></td>
+        <td data-label="Category"><%= product.category&.name %></td>
+        <td data-label="Price"><%= number_to_currency(product.price) %></td>
+        <td data-label="Stock Quantity"><%= product.stock_quantity %></td>
+        <td><%= link_to "Edit", edit_admin_product_path(product) %></td>
+        <td>
+          <%= link_to "Delete", admin_product_path(product), method: :delete, data: { confirm: "Are you sure?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
