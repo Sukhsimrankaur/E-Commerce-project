@@ -8,6 +8,7 @@
       <th>Name</th>
       <th>SKU</th>
       <th>Category</th>
+      <th>Image</th>
       <th>Price</th>
       <th>Stock Quantity</th>
       <th colspan="2">Actions</th>
@@ -19,6 +20,13 @@
         <td data-label="Name"><%= product.name %></td>
         <td data-label="SKU"><%= product.sku %></td>
         <td data-label="Category"><%= product.category&.name %></td>
+        <td data-label="Image">
+          <% if product.image.attached? %>
+            <%= image_tag product.image, size: "100x100" %>
+          <% else %>
+            No image uploaded
+          <% end %>
+        </td>
         <td data-label="Price"><%= number_to_currency(product.price) %></td>
         <td data-label="Stock Quantity"><%= product.stock_quantity %></td>
         <td><%= link_to "Edit", edit_admin_product_path(product) %></td>
