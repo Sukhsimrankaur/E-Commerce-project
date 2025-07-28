@@ -33,10 +33,15 @@ module Admin
     end
 
     def destroy
-      @product = Product.find(params[:id])
-      @product.destroy
-      redirect_to admin_products_path, notice: "Product deleted successfully."
+      @product = Product.find_by(id: params[:id])
+      if @product
+        @product.destroy
+        redirect_to admin_products_path, notice: "Product deleted successfully."
+      else
+        redirect_to admin_products_path, alert: "Product not found."
+      end
     end
+
 
     private
 

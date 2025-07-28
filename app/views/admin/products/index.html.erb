@@ -31,7 +31,7 @@
         <td data-label="Stock Quantity"><%= product.stock_quantity %></td>
         <td><%= link_to "Edit", edit_admin_product_path(product) %></td>
         <td>
-          <%= link_to "Delete", admin_product_path(product), method: :delete, data: { confirm: "Are you sure?" } %>
+          <%= button_to "Delete", admin_product_path(product), method: :delete, data: { confirm: "Are you sure?" }, form_class: "inline-delete" %>
         </td>
       </tr>
     <% end %>
