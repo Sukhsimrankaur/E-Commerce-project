@@ -32,10 +32,11 @@ module Admin
       end
     end
 
-    def destroy
-      @category.destroy
-      redirect_to admin_categories_path, notice: "Category deleted."
-    end
+   def destroy
+  @category.destroy
+  redirect_to admin_categories_path, notice: "Category deleted."
+   end
+
 
     private
 

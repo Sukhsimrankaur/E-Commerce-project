@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_27_203736) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_28_134301) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -49,13 +49,20 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_27_203736) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "page_contents", force: :cascade do |t|
+    t.string "key"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.string "sku"
     t.decimal "price"
     t.integer "stock_quantity"
-    t.bigint "category_id", null: false
+    t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_products_on_category_id"
@@ -76,5 +83,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_27_203736) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "products", "categories"
+  add_foreign_key "products", "categories", on_delete: :nullify
 end
