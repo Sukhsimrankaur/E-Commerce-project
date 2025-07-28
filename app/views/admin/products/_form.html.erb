@@ -21,9 +21,17 @@
   </div>
 
     <div class="form-container">
-        <%= form.label :image %><br>
-        <%= form.file_field :image %> <!-- For one image -->
-        <!-- OR use <%= form.file_field :images, multiple: true %> for multiple images -->
+  <%= form.label :image %><br>
+  <%= form.file_field :image %> <!-- Upload new image -->
+
+  <% if @product.image.attached? %>
+    <div>
+      <%= form.check_box :remove_image %>
+      <%= form.label :remove_image, "Delete current image" %>
+    </div>
+  <% end %>
+</div>
+
 
   <div class="form-container">
     <%= form.label :sku %><br>

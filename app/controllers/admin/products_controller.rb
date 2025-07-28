@@ -25,11 +25,15 @@ module Admin
     end
 
     def update
-      if @product.update(product_params)
-        redirect_to admin_products_path, notice: "Product updated successfully."
-      else
-        render :edit
-      end
+  if params[:product][:remove_image] == "1"
+    @product.image.purge
+  end
+
+  if @product.update(product_params.except(:remove_image))
+    redirect_to admin_products_path, notice: "Product updated successfully."
+  else
+    render :edit
+  end
     end
 
     def destroy
@@ -50,7 +54,7 @@ module Admin
     end
 
     def product_params
-      params.require(:product).permit(:name, :description, :sku, :price, :stock_quantity, :category_id, :image)
+      params.require(:product).permit(:name, :description, :sku, :price, :stock_quantity, :category_id, :image, :remove_image)
     end
 
     def require_admin

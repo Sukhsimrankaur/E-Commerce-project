@@ -21,7 +21,7 @@ gem "jbuilder"
 # gem "bcrypt", "~> 3.1.7"
 
 # Manually add this
-gem 'devise'
+gem "devise"
 
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
