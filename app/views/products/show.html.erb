@@ -1,0 +1,15 @@
+<h1><%= @product.name %></h1>
+
+<% if @product.image.attached? %>
+  <%= image_tag @product.image, size: "400x400" %>
+<% else %>
+  <p>No image available</p>
+<% end %>
+
+<p><strong>Category:</strong> <%= @product.category&.name %></p>
+<p><strong>Price:</strong> <%= number_to_currency(@product.price) %></p>
+<p><strong>Description:</strong></p>
+<p><%= simple_format(@product.description) %></p>
+<p><strong>Stock:</strong> <%= @product.stock_quantity %></p>
+
+<%= link_to "← Back to Products", root_path, class: "btn btn-secondary" %>
