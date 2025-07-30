@@ -283,3 +283,17 @@ button[type="submit"]:hover {
     color: #555;
   }
 }
+
+
+/* Product card styling */
+.product-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.product-card:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transform: translateY(-5px);
+  cursor: pointer;
+}
