@@ -1,0 +1,18 @@
+<!-- Search Form -->
+<%= form_with url: search_products_path, method: :get, local: true do |form| %>
+  <div class="flex gap-4 items-end">
+    <div>
+      <%= form.label :query, "Search Products" %>
+      <%= form.text_field :query, class: "input", placeholder: "Enter keyword..." %>
+    </div>
+
+    <div>
+      <%= form.label :category_id, "Filter by Category" %>
+      <%= form.collection_select :category_id, Category.all, :id, :name, include_blank: "All Categories", class: "select" %>
+    </div>
+
+    <div>
+      <%= form.submit "Search", class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
