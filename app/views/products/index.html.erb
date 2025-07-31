@@ -2,8 +2,8 @@
 
 <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;">
   <% @products.each do |product| %>
-    <div class="product-card">
-      <%= link_to product_path(product), style: "text-decoration: none; color: inherit;" do %>
+    <%= link_to product_path(product), style: "text-decoration: none; color: inherit;" do %>
+      <div class="product-card">
         <% if product.image.attached? %>
           <%= image_tag product.image, size: "200x200" %>
         <% else %>
@@ -13,8 +13,8 @@
         <p><strong>Price:</strong> <%= number_to_currency(product.price) %></p>
         <p><strong>Category:</strong> <%= product.category&.name %></p>
         <p><%= truncate(product.description, length: 100) %></p>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   <% end %>
 </div>
 
