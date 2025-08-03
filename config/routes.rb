@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get "cart/show", to: "cart#show", as: :cart
+
+  post "cart/add_item/:product_id", to: "cart#add_to_cart", as: :add_to_cart
+  delete "cart/remove_item/:product_id", to: "cart#remove_from_cart", as: :remove_from_cart
+  patch "cart/update_item/:product_id", to: "cart#update_item", as: :update_cart_item
+
   get "home/index"
   devise_for :users
 
@@ -16,6 +22,5 @@ Rails.application.routes.draw do
 
   get 'up' => 'rails/health#show', as: :rails_health_check
 
-  # root "home#index"
   root "products#index"
 end

@@ -29,11 +29,12 @@
       <% if user_signed_in? %>
         Logged in as <%= current_user.email %> |
         <%= link_to 'Admin Dashboard', admin_dashboard_path if current_user.admin? %> |
-<%= link_to 'Logout', destroy_user_session_path, method: :delete, data: { turbo_method: :delete } %>
+        <%= link_to 'Logout', destroy_user_session_path, method: :delete, data: { turbo_method: :delete } %>
       <% else %>
         <%= link_to 'Admin Login', new_user_session_path %> |
         <%= link_to 'Sign Up', new_user_registration_path %>
-      <% end %>
+      <% end %> |
+      <%= link_to 'Show Cart', cart_path, class: "nav-link", style: "margin-left: 20px;" %>
     </nav>
 
     <%= yield %>

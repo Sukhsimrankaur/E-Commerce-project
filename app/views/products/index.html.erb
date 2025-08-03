@@ -1,12 +1,13 @@
 <h1>Shop Products</h1>
 
-<!-- include the search form partial -->
+<!-- Include the search form partial -->
 <%= render 'search_form' %>
 
 <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;">
   <% @products.each do |product| %>
-    <%= link_to product_path(product), style: "text-decoration: none; color: inherit;" do %>
-      <div class="product-card">
+    <div class="product-card" style="border: 1px solid #ccc; padding: 10px; border-radius: 8px;">
+      
+      <%= link_to product_path(product), style: "text-decoration: none; color: inherit;" do %>
         <% if product.image.attached? %>
           <%= image_tag product.image, size: "200x200" %>
         <% else %>
@@ -16,8 +17,16 @@
         <p><strong>Price:</strong> <%= number_to_currency(product.price) %></p>
         <p><strong>Category:</strong> <%= product.category&.name %></p>
         <p><%= truncate(product.description, length: 100) %></p>
-      </div>
-    <% end %>
+      <% end %>
+
+      <%= form_with url: add_to_cart_path(product.id), method: :post, local: true do %>
+        <div style="margin-top: 10px;">
+          <%= number_field_tag :quantity, 1, min: 1, class: "form-control", style: "width: 60px;" %>
+          <%= submit_tag "Add to Cart", class: "btn btn-primary", style: "margin-top: 5px;" %>
+        </div>
+      <% end %>
+      
+    </div>
   <% end %>
 </div>
 
