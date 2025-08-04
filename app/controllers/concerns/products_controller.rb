@@ -1,6 +1,9 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.includes(:category, image_attachment: :blob).all
+    @products = Product.includes(:category, image_attachment: :blob)
+                       .order(created_at: :desc)
+                       .page(params[:page])
+                       .per(9)
   end
 
   def show
@@ -14,17 +17,20 @@ class ProductsController < ApplicationController
     @query = params[:query]
     @category_id = params[:category_id]
 
-    @products = Product.all
+    @products = Product.includes(:category, image_attachment: :blob)
 
     if @query.present?
-      @products = @products.where("name ILIKE ?", "%#{@query}%")
+      @products = @products.where("name ILIKE ?", "%#{@query.strip}%")
     end
 
     if @category_id.present?
       @products = @products.where(category_id: @category_id)
     end
 
-    @products = @products.includes(:category).order(created_at: :desc)
+    @products = @products.order(created_at: :desc)
+                         .page(params[:page])
+                         .per(9)
+
     render :index
   end
 end
