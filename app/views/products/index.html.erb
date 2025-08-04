@@ -30,6 +30,12 @@
   <% end %>
 </div>
 
+<!-- Pagination links -->
+<div style="margin-top: 20px; text-align: center;">
+  <%= paginate @products %>
+</div>
+
+
 <% if @products.empty? %>
   <p>No products available at the moment.</p>
 <% end %>
