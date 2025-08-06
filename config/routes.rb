@@ -14,6 +14,9 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :checkout, only: [:new, :create]
+  get '/invoice/:id', to: 'orders#invoice', as: 'invoice'
+
   namespace :admin do
     resources :products
     resources :categories

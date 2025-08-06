@@ -1,0 +1,14 @@
+<h2>Invoice</h2>
+<p>Order ID: <%= @order.id %></p>
+<p>Date: <%= @order.created_at.strftime("%B %d, %Y") %></p>
+
+<% @order.order_items.each do |item| %>
+  <p><%= item.product.name %> x <%= item.quantity %>: <%= number_to_currency(item.price_at_order * item.quantity) %></p>
+<% end %>
+
+<% rates = tax_rates_for(@order.address.province) %>
+<p>Subtotal: <%= number_to_currency(@order.total_price) %></p>
+<p>GST: <%= number_to_currency(@order.total_price * rates[:gst]) %></p>
+<p>PST: <%= number_to_currency(@order.total_price * rates[:pst]) %></p>
+<p>HST: <%= number_to_currency(@order.total_price * rates[:hst]) %></p>
+<p><strong>Total: <%= number_to_currency(@order.total_price * (1 + rates.values.sum)) %></strong></p>

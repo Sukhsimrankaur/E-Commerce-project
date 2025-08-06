@@ -1,0 +1,13 @@
+<h2>Shipping Address</h2>
+<%= form_with model: @address, url: checkout_index_path, local: true do |f| %>
+  <%= f.label :address_line1 %>
+  <%= f.text_field :address_line1 %><br>
+
+  <%= f.label :province %>
+  <%= f.select :province, options_for_select(["MB", "ON", "NS", "BC", "AB", "QC"]) %><br>
+
+  <%= f.label :postal_code %>
+  <%= f.text_field :postal_code %><br>
+
+  <%= f.submit "Continue to Payment" %>
+<% end %>

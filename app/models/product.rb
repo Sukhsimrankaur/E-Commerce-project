@@ -2,6 +2,7 @@ class Product < ApplicationRecord
    belongs_to :category, optional: true
 
   has_one_attached :image  # For one image
+  has_many :order_items
 
   # Validations
   validates :name, presence: true, uniqueness: true
