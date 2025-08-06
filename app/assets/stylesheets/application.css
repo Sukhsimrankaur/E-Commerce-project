@@ -11,13 +11,13 @@
 /* Navigation bar styling */
 
 nav {
-  background-color: #a52c30; /* Dark blue */
+  background-color: #004080; /* Dark blue */
   padding: 10px 20px;
   font-family: Arial, sans-serif;
 }
 
 nav a {
-  color: #1c1111; /* White text */
+  color: #ffffff; /* White text */
   text-decoration: none;
   margin-right: 15px;
   font-weight: 600;
