@@ -1,14 +1,72 @@
 <h2>Invoice</h2>
-<p>Order ID: <%= @order.id %></p>
-<p>Date: <%= @order.created_at.strftime("%B %d, %Y") %></p>
 
-<% @order.order_items.each do |item| %>
-  <p><%= item.product.name %> x <%= item.quantity %>: <%= number_to_currency(item.price_at_order * item.quantity) %></p>
-<% end %>
+<table border="1" cellpadding="8" cellspacing="0">
+  <tr>
+    <th>Order ID</th>
+    <td><%= @order.id %></td>
+  </tr>
+  <tr>
+    <th>Date</th>
+    <td><%= @order.created_at.strftime("%B %d, %Y") %></td>
+  </tr>
+  <tr>
+    <th>Customer Name</th>
+    <td><%= @order.address.name %></td>
+  </tr>
+  <tr>
+    <th>Phone Number</th>
+    <td><%= @order.address.phone %></td>
+  </tr>
+  <tr>
+    <th>Shipping Address</th>
+    <td><%= @order.address.address_line1 %>, <%= @order.address.province %>, <%= @order.address.postal_code %></td>
+  </tr>
+</table>
+
+<br>
+
+<h3>Order Items</h3>
+<table border="1" cellpadding="8" cellspacing="0">
+  <tr>
+    <th>Product</th>
+    <th>Quantity</th>
+    <th>Unit Price</th>
+    <th>Total</th>
+  </tr>
+  <% @order.order_items.each do |item| %>
+    <tr>
+      <td><%= item.product.name %></td>
+      <td><%= item.quantity %></td>
+      <td><%= number_to_currency(item.price_at_order) %></td>
+      <td><%= number_to_currency(item.price_at_order * item.quantity) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br>
 
 <% rates = tax_rates_for(@order.address.province) %>
-<p>Subtotal: <%= number_to_currency(@order.total_price) %></p>
-<p>GST: <%= number_to_currency(@order.total_price * rates[:gst]) %></p>
-<p>PST: <%= number_to_currency(@order.total_price * rates[:pst]) %></p>
-<p>HST: <%= number_to_currency(@order.total_price * rates[:hst]) %></p>
-<p><strong>Total: <%= number_to_currency(@order.total_price * (1 + rates.values.sum)) %></strong></p>
+
+<h3>Summary</h3>
+<table border="1" cellpadding="8" cellspacing="0">
+  <tr>
+    <th>Subtotal</th>
+    <td><%= number_to_currency(@order.total_price) %></td>
+  </tr>
+  <tr>
+    <th>GST</th>
+    <td><%= number_to_currency(@order.total_price * rates[:gst]) %></td>
+  </tr>
+  <tr>
+    <th>PST</th>
+    <td><%= number_to_currency(@order.total_price * rates[:pst]) %></td>
+  </tr>
+  <tr>
+    <th>HST</th>
+    <td><%= number_to_currency(@order.total_price * rates[:hst]) %></td>
+  </tr>
+  <tr>
+    <th><strong>Total</strong></th>
+    <td><strong><%= number_to_currency(@order.total_price * (1 + rates.values.sum)) %></strong></td>
+  </tr>
+</table>

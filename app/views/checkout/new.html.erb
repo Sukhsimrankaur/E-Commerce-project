@@ -1,5 +1,15 @@
 <h2>Shipping Address</h2>
+
 <%= form_with model: @address, url: checkout_index_path, local: true do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %><br>
+
+  <%= f.label :phone %>
+  <%= f.text_field :phone %><br>
+
+  <%= f.label :card_number, "Credit Card Number" %>
+  <%= f.text_field :card_number %><br>
+
   <%= f.label :address_line1 %>
   <%= f.text_field :address_line1 %><br>
 
@@ -9,5 +19,5 @@
   <%= f.label :postal_code %>
   <%= f.text_field :postal_code %><br>
 
-  <%= f.submit "Continue to Payment" %>
+  <%= f.submit "Place Order" %>
 <% end %>

@@ -39,6 +39,6 @@ class CheckoutController < ApplicationController
   end
 
   def address_params
-    params.require(:address).permit(:address_line1, :province, :postal_code)
+    params.require(:address).permit(:name, :phone, :address_line1, :province, :postal_code)
   end
 end
